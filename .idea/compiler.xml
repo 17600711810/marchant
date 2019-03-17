@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="marchant-web" />
+        <module name="merchant-common" />
+        <module name="merchant-dao" />
+        <module name="merchant-gzh" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="marchant" target="1.8" />
+      <module name="marchant-web" target="1.8" />
+      <module name="merchant-common" target="1.8" />
+      <module name="merchant-dao" target="1.8" />
+      <module name="merchant-entity" target="1.8" />
+      <module name="merchant-gzh" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="marchant" options="-parameters" />
+      <module name="marchant-web" options="-parameters" />
+      <module name="merchant-common" options="-parameters" />
+      <module name="merchant-dao" options="-parameters" />
+      <module name="merchant-entity" options="-parameters" />
+      <module name="merchant-gzh" options="-parameters" />
+    </option>
+  </component>
+</project>

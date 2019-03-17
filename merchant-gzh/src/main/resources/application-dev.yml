@@ -1,0 +1,8 @@
+wx:
+  configs:
+    - appId: wx0f858a9b25a47a80
+      secret: 9311fe940fba8cf9180b6393a1f61844
+      token: EvRHuRldcICEW8BPSzVzsiHzqCovgPSn
+      aesKey: EvRHuRldcICEW8BPSzVzsiHzqCovgPSn1231dasasdd
+server:
+  port: 8089
