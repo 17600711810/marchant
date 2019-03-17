@@ -8,4 +8,8 @@ public interface MerchantInfoService {
     public MerchantInfoEntity findMerchantInfoEntityByUserName(String userName);
 
     public MerchantInfoEntity save(MerchantInfoEntity merchantInfoEntity);
+
+    public MerchantInfoEntity findById(String id);
+
+    public MerchantInfoEntity updatePassword(MerchantInfoEntity merchantInfoEntity)throws Exception;
 }

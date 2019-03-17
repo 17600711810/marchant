@@ -1,5 +1,6 @@
 package com.acui.merchant.web.controller;
 
+import com.acui.merchant.web.annotator.CurrentUser;
 import com.acui.merchant.web.config.TokenUtils;
 import com.acui.merchant.web.service.MerchantInfoService;
 import com.acui.merchant.common.utils.*;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -25,11 +25,12 @@ public class MerchantInfoController {
     @Autowired
     RedisUtils redisUtils;
     //登陆
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result login(String userName, String password) {
         Result result = null;
         try {
-            logger.info("已进入登陆：-u:"+userName+"  -p:"+password);
+            logger.info("" +
+                    "已进入登陆：-u:"+userName+"  -p:"+password);
             MerchantInfoEntity merchantInfoEntity = merchantInfoService.login(userName, password);
             if (merchantInfoEntity == null){
                 result = Result.failure(ResultCode.USER_LOGIN_ERROR,ResultCode.USER_LOGIN_ERROR.message());
@@ -42,12 +43,12 @@ public class MerchantInfoController {
         }catch (Exception e){
             logger.error("登陆失败，服务器异常！！！",e);
             result = Result.failure(ResultCode.FAILURE,"登陆失败，服务器异常！！！");
-            e.printStackTrace();
         }finally {
             return  result;
         }
     }
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result register(MerchantInfoEntity merchantInfoEntity) {
         Result result = null;
 
@@ -79,9 +80,36 @@ public class MerchantInfoController {
         }catch (Exception e){
             logger.error("登陆失败，服务器异常！！！",e);
             result = Result.failure(ResultCode.FAILURE,"注册失败，服务器异常！！！");
-            e.printStackTrace();
         }finally {
             return  result;
+        }
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public Result logout(@CurrentUser MerchantInfoEntity merchantInfoEntity){
+        Result result = null;
+        try{
+            redisUtils.delete("token:"+merchantInfoEntity.getId());
+            result = Result.success();
+        }catch (Exception e){
+            logger.error("失败，服务器异常！！！",e);
+            result = Result.failure(ResultCode.FAILURE,"退出失败，服务器异常！！！");
+        }finally{
+            return result;
+        }
+    }
+
+    @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
+    public Result updatePassword(@CurrentUser MerchantInfoEntity merchantInfoEntity){
+        Result result = null;
+        try {
+            merchantInfoEntity = merchantInfoService.updatePassword(merchantInfoEntity);
+            result = Result.success(merchantInfoEntity);
+        }catch (Exception e){
+            logger.error("失败，服务器异常！！！",e);
+            result = Result.failure(ResultCode.FAILURE,"密码更改失败，服务器异常！！！");
+        }finally {
+            return result;
         }
     }
 }

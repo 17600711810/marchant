@@ -28,6 +28,18 @@ public class MerchantInfoEntity {
     private Byte state;
     private String payPassword;
 
+    @Transient
+    private BurseEntity burseEntity;
+
+    public void setBurseEntity(BurseEntity burseEntity) {
+        this.burseEntity = burseEntity;
+    }
+
+    public BurseEntity getBurseEntity() {
+
+        return burseEntity;
+    }
+
     @Id
     @Column(name = "id")
     public String getId() {

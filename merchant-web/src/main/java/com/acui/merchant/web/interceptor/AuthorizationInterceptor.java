@@ -6,6 +6,7 @@ import com.acui.merchant.common.utils.ConstantKit;
 import com.acui.merchant.common.utils.RedisUtils;
 import com.acui.merchant.dao.entity.MerchantInfoEntity;
 import com.acui.merchant.dao.repository.MerchantInfoRepository;
+import com.acui.merchant.web.service.MerchantInfoService;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +44,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private RedisUtils redisUtils;
     @Autowired
-    private MerchantInfoRepository merchantInfoRepository;
+    private MerchantInfoService merchantInfoService;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (!(handler instanceof HandlerMethod)) {
@@ -81,7 +82,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
             if(merchantInfoMap == null || merchantInfoMap.size() == 0){
                 Map<String,String> merchantMap = new HashMap<String,String>();
-                merchantInfoEntity = merchantInfoRepository.findById(merchantId).get();
+                merchantInfoEntity = merchantInfoService.findById(merchantId);
                 BeanUtils.transformBeanToMap(merchantInfoEntity,merchantMap);
                 redisUtils.putAll("merchant_info:" + merchantId,merchantMap);
             }else{

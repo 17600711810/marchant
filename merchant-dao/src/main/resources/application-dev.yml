@@ -11,14 +11,14 @@ spring:
     data-username: root
     data-password: root
     platform: mysql
-    schema: classpath:schema.sql # schema.sql中一般存放的是DDL脚本，即通常为创建或更新库表的脚本
-    initialization-mode: always
+    #schema: classpath:schema.sql # schema.sql中一般存放的是DDL脚本，即通常为创建或更新库表的脚本
+    #initialization-mode: always
     #continue-on-error: true
     batch:
       initialize-schema: always
   jpa:
     hibernate:
-    #  ddl-auto: create-drop # 如果使用initialization-mode 则禁用ddl-auto
+      ddl-auto: create-drop # 如果使用initialization-mode 则禁用ddl-auto
     show-sql: true  #data: classpath:data.sql # data.sql中一般是DML脚本，即通常为数据插入脚本
     properties:
       hibernate:

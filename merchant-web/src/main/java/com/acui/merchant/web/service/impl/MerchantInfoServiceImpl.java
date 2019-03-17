@@ -1,5 +1,7 @@
 package com.acui.merchant.web.service.impl;
 
+import com.acui.merchant.dao.repository.BurseRepository;
+import com.acui.merchant.web.config.TokenUtils;
 import com.acui.merchant.web.service.MerchantInfoService;
 import com.acui.merchant.common.config.MerchantConfig;
 import com.acui.merchant.common.utils.HashUtils;
@@ -16,6 +18,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -26,6 +29,9 @@ public class MerchantInfoServiceImpl implements MerchantInfoService {
 
     @Autowired
     private RedisUtils redisUtils;
+
+    @Autowired
+    private BurseRepository burseRepository;
 
     @Override
     @Transactional
@@ -38,9 +44,7 @@ public class MerchantInfoServiceImpl implements MerchantInfoService {
             if (merchantInfoEntity == null){
                 merchantInfoEntity = merchantInfoRepository.findMerchantInfoEntityByUserName(username);
                 if (merchantInfoEntity != null){
-                    Map<String,String> merchantMap = new HashMap<String,String>();
-                    BeanUtils.transformBeanToMap(merchantInfoEntity,merchantMap);
-                    redisUtils.putAll("merchant_info:" + merchantId,merchantMap);
+                    TokenUtils.saveMerchantInfoByMerchantInfoEntity(redisUtils,merchantInfoEntity);
                 }
             }
         }else {
@@ -59,11 +63,33 @@ public class MerchantInfoServiceImpl implements MerchantInfoService {
         }
         return null;
     }
-
+    @Override
     public MerchantInfoEntity findMerchantInfoEntityByUserName(String userName) {
-        return merchantInfoRepository.findMerchantInfoEntityByUserName(userName);
+        MerchantInfoEntity merchantInfoEntity = merchantInfoRepository.findMerchantInfoEntityByUserName(userName);
+        if(merchantInfoEntity != null)
+        merchantInfoEntity.setBurseEntity(burseRepository.findById(merchantInfoEntity.getId()).get());
+        return merchantInfoEntity;
     }
+    @Override
     public MerchantInfoEntity save(MerchantInfoEntity merchantInfoEntity){
         return merchantInfoEntity = merchantInfoRepository.save(merchantInfoEntity);
+    }
+
+    @Override
+    public MerchantInfoEntity findById(String id) {
+        MerchantInfoEntity merchantInfoEntity = merchantInfoRepository.findById(id).get();
+        if(merchantInfoEntity != null)
+        merchantInfoEntity.setBurseEntity(burseRepository.findById(merchantInfoEntity.getId()).get());
+        return merchantInfoEntity;
+    }
+
+    @Override
+    public MerchantInfoEntity updatePassword(MerchantInfoEntity merchantInfoEntity) throws Exception{
+        String password = merchantInfoEntity.getPassword();
+        String encryPassword = HashUtils.sha1HashEncryPassword(password);
+        merchantInfoEntity.setPassword(encryPassword);
+        MerchantInfoEntity entity = merchantInfoRepository.save(merchantInfoEntity);
+        TokenUtils.saveMerchantInfoByMerchantInfoEntity(redisUtils,entity);
+        return entity;
     }
 }

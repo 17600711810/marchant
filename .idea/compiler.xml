@@ -9,6 +9,7 @@
         <module name="merchant-common" />
         <module name="merchant-dao" />
         <module name="merchant-gzh" />
+        <module name="merchant-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

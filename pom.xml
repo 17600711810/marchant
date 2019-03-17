@@ -14,7 +14,7 @@
     <name>marchant</name>
     <packaging>pom</packaging>
     <modules>
-        <module>marchant-web</module>
+        <module>merchant-web</module>
         <module>merchant-gzh</module>
         <module>merchant-common</module>
         <module>merchant-dao</module>

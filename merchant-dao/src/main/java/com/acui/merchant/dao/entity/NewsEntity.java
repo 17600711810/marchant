@@ -16,7 +16,7 @@ public class NewsEntity {
     private String merchantId;
     private Timestamp createTime;
     private String msg;
-    private Byte newsType;
+    private String newsType;
     private String tradeId;
 
     @Id
@@ -61,11 +61,11 @@ public class NewsEntity {
 
     @Basic
     @Column(name = "news_type")
-    public Byte getNewsType() {
+    public String getNewsType() {
         return newsType;
     }
 
-    public void setNewsType(Byte newsType) {
+    public void setNewsType(String newsType) {
         this.newsType = newsType;
     }
 
