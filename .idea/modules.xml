@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/merchant-web/marchant-web.iml" filepath="$PROJECT_DIR$/merchant-web/marchant-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/merchant.iml" filepath="$PROJECT_DIR$/merchant.iml" />
       <module fileurl="file://$PROJECT_DIR$/merchant-common/merchant-common.iml" filepath="$PROJECT_DIR$/merchant-common/merchant-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/merchant-dao/merchant-dao.iml" filepath="$PROJECT_DIR$/merchant-dao/merchant-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/merchant-gzh/merchant-gzh.iml" filepath="$PROJECT_DIR$/merchant-gzh/merchant-gzh.iml" />
-      <module fileurl="file://$PROJECT_DIR$/merchant-web/marchant-web.iml" filepath="$PROJECT_DIR$/merchant-web/marchant-web.iml" />
     </modules>
   </component>
 </project>

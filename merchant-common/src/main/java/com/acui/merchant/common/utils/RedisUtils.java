@@ -10,6 +10,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 /**
  * @author Carey 2018年1月23日
  *
@@ -19,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RedisUtils {
 
-    @Autowired
+    @Resource
     private RedisTemplate<Object,Object> redisTemplate;
 
     public RedisTemplate<Object,Object> getInstance(){
