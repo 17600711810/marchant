@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.acui</groupId>
-        <artifactId>marchant</artifactId>
+        <artifactId>merchant</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../</relativePath>  <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>marchant-web</artifactId>
+    <artifactId>merchant-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>marchant-web</name>
+    <name>merchant-web</name>
     <description>Demo project for Spring Boot</description>
 
     <dependencies>
@@ -46,10 +46,27 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.acui.merchant.web.MarchantWebApplication</mainClass>
+                    <mainClass>com.acui.merchant.web.MerchantWebApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.yml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
 </project>

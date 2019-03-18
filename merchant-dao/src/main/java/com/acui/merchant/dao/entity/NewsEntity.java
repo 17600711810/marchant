@@ -7,11 +7,10 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "news", schema = "merchant", catalog = "")
+@Table(name = "news", catalog = "")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class NewsEntity {
-    @GeneratedValue(generator = "jpa-uuid")
-    @Column(length = 32)
+
     private String id;
     private String merchantId;
     private Timestamp createTime;
@@ -20,7 +19,8 @@ public class NewsEntity {
     private String tradeId;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", length = 32)
+    @GeneratedValue(generator = "jpa-uuid")
     public String getId() {
         return id;
     }

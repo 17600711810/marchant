@@ -72,7 +72,7 @@ public class MerchantInfoController {
             String token = StringUtils.getUUID();
             merchantInfoEntity.setCreateTime(new Timestamp(new Date().getTime()));
             if(merchantInfoEntity.getMerchantName() == null) merchantInfoEntity.setMerchantName(StringUtils.getUUID());
-            merchantInfoEntity.setState((byte)0);
+            merchantInfoEntity.setState("0");
             merchantInfoEntity = merchantInfoService.save(merchantInfoEntity);
             result.setToken(token);
             TokenUtils.setToken(redisUtils,merchantInfoEntity);

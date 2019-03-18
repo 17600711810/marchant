@@ -6,22 +6,22 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "wx_user", schema = "merchant", catalog = "")
+@Table(name = "wx_user", catalog = "")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class WxUserEntity {
-    @GeneratedValue(generator = "jpa-uuid")
-    @Column(length = 32)
+
     private String id;
     private String userName;
     private String attentionTime;
     private String openId;
     private String unionId;
     private String phoneNumber;
-    private Byte state;
+    private String state;
     private Integer totalGetBanlance;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", length = 32)
+    @GeneratedValue(generator = "jpa-uuid")
     public String getId() {
         return id;
     }
@@ -82,11 +82,11 @@ public class WxUserEntity {
 
     @Basic
     @Column(name = "state")
-    public Byte getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(Byte state) {
+    public void setState(String state) {
         this.state = state;
     }
 

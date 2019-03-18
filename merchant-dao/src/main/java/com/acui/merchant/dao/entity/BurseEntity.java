@@ -1,21 +1,19 @@
 package com.acui.merchant.dao.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "burse", schema = "merchant", catalog = "")
-@GenericGenerator(name = "jpa-uuid", strategy = "uuid")
+@Table(name = "burse",schema = "merchant",catalog = "")
 public class BurseEntity {
+
     private String merchantId;
     private Integer totalTopUp;
     private Integer balance;
-    private Integer totalRedPacket;
+    private Integer totalRedPacket;//总发放红包
 
     @Id
-    @Column(name = "merchant_id")
+    @Column(name = "merchant_id", length = 32)
     public String getMerchantId() {
         return merchantId;
     }

@@ -8,12 +8,10 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "merchant_info", schema = "merchant", catalog = "")
+@Table(name = "merchant_info", catalog = "")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class MerchantInfoEntity {
 
-    @GeneratedValue(generator = "jpa-uuid")
-    @Column(length = 32)
     private String id;
     private String merchantName;
     private String password;
@@ -25,23 +23,25 @@ public class MerchantInfoEntity {
     private String openId;
     private String unionId;
     private String userName;
-    private Byte state;
+    private String state = "0";
     private String payPassword;
 
-    @Transient
+
     private BurseEntity burseEntity;
 
     public void setBurseEntity(BurseEntity burseEntity) {
         this.burseEntity = burseEntity;
     }
 
+    @Transient
     public BurseEntity getBurseEntity() {
 
         return burseEntity;
     }
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", length = 32)
+    @GeneratedValue(generator = "jpa-uuid")
     public String getId() {
         return id;
     }
@@ -152,11 +152,11 @@ public class MerchantInfoEntity {
 
     @Basic
     @Column(name = "state")
-    public Byte getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(Byte state) {
+    public void setState(String state) {
         this.state = state;
     }
 

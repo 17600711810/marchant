@@ -28,7 +28,7 @@ public class NewsServiceImpl implements NewsService {
         ExampleMatcher exampleMatcher = ExampleMatcher.matching().
                 withMatcher("newsType",ExampleMatcher.GenericPropertyMatchers.startsWith());
         Example<NewsEntity> example = Example.of(newsEntity ,exampleMatcher);
-        Pageable pageable = new PageRequest(pageNumber,number);
-        return  newsRepository.findAll(example,new Sort(Sort.Direction.DESC,"create_time"),pageable);
+//      Pageable pageable = new PageRequest(pageNumber,number);
+        return  newsRepository.findAll(example,new Sort(Sort.Direction.DESC,"create_time"));
     }
 }

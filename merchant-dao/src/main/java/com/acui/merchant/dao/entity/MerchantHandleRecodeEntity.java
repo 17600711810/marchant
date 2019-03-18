@@ -6,11 +6,10 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "merchant_handle_recode", schema = "merchant", catalog = "")
+@Table(name = "merchant_handle_recode", catalog = "")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class MerchantHandleRecodeEntity {
-    @GeneratedValue(generator = "jpa-uuid")
-    @Column(length = 32)
+
     private String id;
     private String merchantId;
     private String handleType;
@@ -19,7 +18,8 @@ public class MerchantHandleRecodeEntity {
     private Integer number;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", length = 32)
+    @GeneratedValue(generator = "jpa-uuid")
     public String getId() {
         return id;
     }

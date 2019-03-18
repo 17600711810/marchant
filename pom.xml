@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.acui</groupId>
-    <artifactId>marchant</artifactId>
+    <artifactId>merchant</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>marchant</name>
+    <name>merchant</name>
     <packaging>pom</packaging>
     <modules>
         <module>merchant-web</module>

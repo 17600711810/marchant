@@ -7,15 +7,14 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "trade", schema = "merchant", catalog = "")
+@Table(name = "trade", catalog = "")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class TradeEntity {
-    @GeneratedValue(generator = "jpa-uuid")
-    @Column(length = 32)
+
     private String id;
     private String merchant;
     private Integer balance;
-    private Byte tradeState;
+    private String tradeState;
     private String tradeType;
     private String userId;
     private String userName;
@@ -26,7 +25,8 @@ public class TradeEntity {
     private String unionId;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", length = 32)
+    @GeneratedValue(generator = "jpa-uuid")
     public String getId() {
         return id;
     }
@@ -57,11 +57,11 @@ public class TradeEntity {
 
     @Basic
     @Column(name = "trade_state")
-    public Byte getTradeState() {
+    public String getTradeState() {
         return tradeState;
     }
 
-    public void setTradeState(Byte tradeState) {
+    public void setTradeState(String tradeState) {
         this.tradeState = tradeState;
     }
 

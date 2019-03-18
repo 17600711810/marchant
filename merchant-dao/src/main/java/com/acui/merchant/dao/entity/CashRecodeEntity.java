@@ -7,24 +7,24 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "cash_recode", schema = "merchant", catalog = "")
+@Table(name = "cash_recode", catalog = "")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class CashRecodeEntity {
-    @GeneratedValue(generator = "jpa-uuid")
-    @Column(length = 32)
+
     private String id;
     private String merchantId;
     private String recodeType;
     private Integer money;
     private String msg;
     private Timestamp createTime;
-    private Byte state;
+    private String state;
     private String unionId;
     private String openId;
     private String wxErrorCode;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", length = 32)
+    @GeneratedValue(generator = "jpa-uuid")
     public String getId() {
         return id;
     }
@@ -85,11 +85,11 @@ public class CashRecodeEntity {
 
     @Basic
     @Column(name = "state")
-    public Byte getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(Byte state) {
+    public void setState(String state) {
         this.state = state;
     }
 

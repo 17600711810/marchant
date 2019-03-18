@@ -2,6 +2,7 @@ package com.acui.merchant.web.config;
 
 import com.acui.merchant.web.interceptor.AuthorizationInterceptor;
 import com.acui.merchant.web.interceptor.MerchantInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -14,19 +15,24 @@ import java.util.List;
 @Configuration
 public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     //关键，将拦截器作为bean写入配置中
-    @Bean
+   /* @Bean
     public AuthorizationInterceptor authInterceptor() {
         return new AuthorizationInterceptor();
     }
     @Bean
     public MerchantInterceptor merchantInterceptor() {
         return new MerchantInterceptor();
-    }
+    }*/
+   @Autowired
+   private AuthorizationInterceptor authorizationInterceptor;
+   @Autowired
+   private MerchantInterceptor merchantInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 注册拦截器
-        InterceptorRegistration ai = registry.addInterceptor(authInterceptor());
-        InterceptorRegistration mi = registry.addInterceptor(merchantInterceptor());
+        InterceptorRegistration ai = registry.addInterceptor(authorizationInterceptor);
+        InterceptorRegistration mi = registry.addInterceptor(merchantInterceptor);
         // 配置拦截的路径
         ai.addPathPatterns("/**");
         mi.addPathPatterns("/**");

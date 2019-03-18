@@ -4,11 +4,10 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/marchant-web/pom.xml" />
+        <option value="$PROJECT_DIR$/merchant-web/pom.xml" />
         <option value="$PROJECT_DIR$/merchant-gzh/pom.xml" />
         <option value="$PROJECT_DIR$/merchant-mapper/pom.xml" />
         <option value="$PROJECT_DIR$/merchant-common/pom.xml" />
-        <option value="$PROJECT_DIR$/entity/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

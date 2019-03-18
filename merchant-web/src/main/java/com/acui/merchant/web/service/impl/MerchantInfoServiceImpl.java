@@ -18,7 +18,6 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -44,6 +43,7 @@ public class MerchantInfoServiceImpl implements MerchantInfoService {
             if (merchantInfoEntity == null){
                 merchantInfoEntity = merchantInfoRepository.findMerchantInfoEntityByUserName(username);
                 if (merchantInfoEntity != null){
+                    if (!merchantInfoEntity.getState().equals("0")) return null;
                     TokenUtils.saveMerchantInfoByMerchantInfoEntity(redisUtils,merchantInfoEntity);
                 }
             }
@@ -52,6 +52,7 @@ public class MerchantInfoServiceImpl implements MerchantInfoService {
             redisUtils.set("user_name:"+username,merchantInfoEntity.getId());
         }
         if (merchantInfoEntity == null) return null;
+        if (!merchantInfoEntity.getState().equals("0")) return null;
         if (merchantInfoEntity.getPassword().equals(HashUtils.sha1HashEncryPassword(password))){
             merchantInfoEntity.setLoginTime(new Timestamp(new Date().getTime()));
             merchantInfoRepository.save(merchantInfoEntity);
@@ -63,6 +64,7 @@ public class MerchantInfoServiceImpl implements MerchantInfoService {
         }
         return null;
     }
+
     @Override
     public MerchantInfoEntity findMerchantInfoEntityByUserName(String userName) {
         MerchantInfoEntity merchantInfoEntity = merchantInfoRepository.findMerchantInfoEntityByUserName(userName);
@@ -70,6 +72,7 @@ public class MerchantInfoServiceImpl implements MerchantInfoService {
         merchantInfoEntity.setBurseEntity(burseRepository.findById(merchantInfoEntity.getId()).get());
         return merchantInfoEntity;
     }
+
     @Override
     public MerchantInfoEntity save(MerchantInfoEntity merchantInfoEntity){
         return merchantInfoEntity = merchantInfoRepository.save(merchantInfoEntity);
